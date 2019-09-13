@@ -181,6 +181,9 @@ RUN rm -rf /etc/nginx/owasp-modsecurity-crs-*
 RUN echo "include /etc/nginx/modsecurity.d/crs.conf">>/etc/nginx/modsecurity.d/include.conf
 RUN sed -i -e 's/SecRuleEngine DetectionOnly/SecRuleEngine On/g' /etc/nginx/modsecurity.d/modsecurity.conf
 
+## Add unicode.mapping file that is missing
+RUN curl -s https://raw.githubusercontent.com/SpiderLabs/ModSecurity/49495f1925a14f74f93cb0ef01172e5abc3e4c55/unicode.mapping --output /etc/nginx/modsecurity.d/unicode.mapping
+
 ## Update nginx config
 COPY nginx /etc/nginx/
 
